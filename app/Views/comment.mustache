@@ -1,0 +1,21 @@
+<div class="comment" id="c{{id}}" style="margin-left: {{indent}}px">
+  <div class="meta">
+    <img src="/avatar.svg" alt="">
+    <strong>{{author}}</strong> · {{created_at}} UTC · depth {{depth}}
+  </div>
+  <p>{{body}}</p>
+  {{#loggedIn}}
+  <details>
+    <summary>Reply</summary>
+    <form method="post" action="/discussions/{{discussion.id}}/comments">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <input type="hidden" name="parent_id" value="{{id}}">
+      <textarea name="body" rows="2" cols="50" required maxlength="2000"></textarea><br>
+      <button>Post reply</button>
+    </form>
+  </details>
+  {{/loggedIn}}
+</div>
+{{#children}}
+  {{> comment}}
+{{/children}}
